@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>User Directory</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <!-- details modal -->
+	<modal id="userDetails_modal">
+		<div class="modal">
+			<div class="modal-body">			
+				<p>
+          <button (click)="openModal('editUser_modal')">Edit User Details</button>			  
+        </p>
+        <p>
+				  <button (click)="delete_user(user._id)">Delete User</button>
+				</p>  
+			</div>
+		</div>
+		<div class="modal-background"></div>
+	</modal>
+  
+
+  <!-- add user details modal -->
+  <modal id= "addUser_modal">
+      <div class="modal">
+        <div class="modal-body">			
+         
+            <div class="container">
+                <div class="row centered-form">
+                <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Add new User</h3>
+                     </div>
+                     <div class="panel-body">
+                      <form role="form">
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <input type="text" name="user_name" id="user_name" class="form-control input-sm"
+                               placeholder="user name"   [(ng-modal)]="add_username">
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                              <div class="form-group">
+                                <input type="text" name="contact" id="contact" class="form-control input-sm" 
+                                placeholder="contact"     [(ng-modal)]="add_contact">
+                              </div>
+                          </div>
+
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <input type="text" name="address" id="address" class="form-control input-sm" 
+                              placeholder="address" [(ng-modal)]="add_address">
+                            </div>
+                          </div>
+                        </div>
+        
+                        <div class="form-group">
+                          <input type="email" name="email" id="email" class="form-control input-sm" 
+                          placeholder="Email Address" [(ng-modal)]="add_username">
+                        </div>
+                                
+                        <input type="submit" (ng-submit)="add_User(user_name)"  value="Add new User" class="btn btn-info btn-block">
+                      
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-background"></div>
+  </modal>
+
+
+  <!-- edit user details modal -->
+  <modal id= "editUser_modal">
+      <div class="modal">
+        <div class="modal-body">			
+         
+            <div class="container">
+                <div class="row centered-form">
+                <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Edit User</h3>
+                     </div>
+                     <div class="panel-body">
+                      <form role="form">
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <input type="text" name="user_name" id="user_name" 
+                              class="form-control input-sm" placeholder="user_name" [(ng-modal)]="edit_username">
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                              <div class="form-group">
+                                <input type="text" name="contact" id="contact" 
+                                class="form-control input-sm" placeholder="contact" [(ng-modal)]="add_contact">
+                              </div>
+                          </div>
+
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <input type="text" name="address" id="address" 
+                              class="form-control input-sm" placeholder="address" [(ng-modal)]="edit_address">
+                            </div>
+                          </div>
+                        </div>
+        
+                        <div class="form-group">
+                          <input type="email" name="email" id="email" 
+                          class="form-control input-sm" placeholder="Email Address" [(ng-modal)]="edit_email">
+                        </div>
+                                
+                        <input type="submit" (ng-submit)="edit_User(user_name)"  value="Save Changes" class="btn btn-info btn-block">
+                      
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-background"></div>
+  </modal>
+
+
+
+  <!-- user details table -->
+<div class="container">
+  <button (click)="openModal('addUser_modal')">Add new User</button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Email</th>
+      </tr>
+	</thead>
+
+	<!--for loop-->
+
+  <div *ngFor="let user of users" >
+    <tbody>
+      <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.address}}</td>       
+        <td>{{user.contact}}</td>
+        <td>{{user.email}}</td>
+		    <button (click)="openModal('userDetails_modal')">...</button>
+      </tr>
+	  </tbody> 
+  </div>
+
+  </table>
+</div>
+
+</body>
+</html>
